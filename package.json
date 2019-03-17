@@ -1,0 +1,13 @@
+{
+  "name": "YWCA-API",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/qtn2932/YWCA-Activities-API.git",
+  "author": "qtn2932 <quan.nguyen199712@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "nodemon": "^1.18.10"
+  }
+}
