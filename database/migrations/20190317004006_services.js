@@ -1,18 +1,18 @@
 
 exports.up = function (knex, Promise) {
-    return knex.schema.createTable("Services", table => {
+    return knex.schema.createTable("services", table => {
         table.increments();
         table.string("Name").notNullable();
         table
-         .integer("Category")
+         .string("Category",255)
          .unsigned()
          .notNullable()
-         .references("id")
-         .inTable("Categories")
+         .references("Name")
+         .inTable("categories")
          .onDelete("CASCADE");
     })
 };
 
 exports.down = function (knex, Promise) {
-    return knex.schema.dropTableIfExists("Services");
+    return knex.schema.dropTableIfExists("services");
 };

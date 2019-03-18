@@ -1,18 +1,11 @@
 
 exports.up = function (knex, Promise) {
-    return knex.schema.createTable("Categories", table => {
+    return knex.schema.createTable("categories", table => {
         table.increments();
         table.string("Name").notNullable();
-        table
-         .string("Chapter",255)
-         .unsigned()
-         .notNullable()
-         .references("Name")
-         .inTable("Chapters")
-         .onDelete("CASCADE");
     })
 };
 
 exports.down = function (knex, Promise) {
-    return knex.schema.dropTableIfExists("Categories");
+    return knex.schema.dropTableIfExists("categories");
 };
