@@ -79,7 +79,7 @@ const getChapterName= ()=>{
         })
       })
 }
-const getChapterName= ()=>{
+const getCategories= ()=>{
     
     return new Promise((resolve, reject) => {
         // Setup empty array to store results
@@ -120,7 +120,7 @@ server.get('/', (req, res) => {
     res.send("YWCA");
 });
 server.get('/chapters', (req, res) => {
-    Promise.resolve(getRecords('appuW1YdhrtU5HaZU')).then(data=>{
+    Promise.resolve(getRecords()).then(data=>{
         res.status(200).json(data)
     }).catch(err=>{
         console.log(err)
@@ -128,7 +128,7 @@ server.get('/chapters', (req, res) => {
     })
 })
 server.get('/chapters/name', (req, res) => {
-    Promise.resolve(getChapterName('appuW1YdhrtU5HaZU')).then(data=>{
+    Promise.resolve(getChapterName()).then(data=>{
         res.status(200).json(data)
     }).catch(err=>{
         console.log(err)
@@ -136,7 +136,7 @@ server.get('/chapters/name', (req, res) => {
     })
 })
 server.get('/categories', (req, res) => {
-    Promise.resolve(getChapterName('appuW1YdhrtU5HaZU')).then(data=>{
+    Promise.resolve(getCategories()).then(data=>{
         res.status(200).json(data)
     }).catch(err=>{
         console.log(err)
