@@ -161,6 +161,45 @@ const getChapterByState= (state)=>{
       })
     })
 }
+const getState= ()=>{
+    
+  return new Promise((resolve, reject) => {
+      // Setup empty array to store results
+      
+      const chaptersRecord = []
+  
+      // Query
+      const apiQuery = {
+        pageSize: 100,
+      }
+  
+      // Go get it!
+      base('States').select(apiQuery).eachPage(function page(records, fetchNextPage) {
+        // This function (`page`) will get called for each page of records.
+        // The properties here would correspond to your records
+
+        records.forEach(record=> {
+
+            const post ={
+              States: record.fields.FullName,
+          }
+          chaptersRecord.push(post);
+          
+  
+          // Store each result in our empty array
+          
+        })
+  
+        fetchNextPage()
+      }, function done(error) {
+        // Throw error if exists
+        if (error) reject({ error })
+  
+        // Finish
+        resolve(chaptersRecord)
+      })
+    })
+}
 const getServiceByChapter= (chapter)=>{
     
   return new Promise((resolve, reject) => {
