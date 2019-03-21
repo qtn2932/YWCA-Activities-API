@@ -293,6 +293,13 @@ server.get('/chapters/services', (req,res)=>{
     res.status(500).json({message:error})
   })
 })
+server.get('/states', (req,res)=>{
+  Promise.resolve(getState()).then(data=>{
+    res.status(200).json(data)
+  }).catch(error=>{
+    res.status(500).json({message:error})
+  })
+})
 server.get('/chapters/categories', (req,res)=>{
   Promise.resolve(getCategoryByChapter(req.headers.chapter)).then(data=>{
     res.status(200).json(data)
