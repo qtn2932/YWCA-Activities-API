@@ -116,7 +116,77 @@ const getCategories= ()=>{
         })
       })
 }
+const getServiceByCategory= (category)=>{
+    
+  return new Promise((resolve, reject) => {
+      // Setup empty array to store results
+      
+      const chaptersRecord = []
+  
+      // Query
+      const apiQuery = {
+        pageSize: 100,
+      }
+  
+      // Go get it!
+      base('Categories').select(apiQuery).eachPage(function page(records, fetchNextPage) {
+        // This function (`page`) will get called for each page of records.
+        // The properties here would correspond to your records
 
+        records.forEach(record=> {
+          console.log(record.fields)
+          if(record.fields.Name==category){
+            // Store each result in our empty array
+          chaptersRecord.push(record.fields.ServiceName)
+          }
+        })
+  
+        fetchNextPage()
+      }, function done(error) {
+        // Throw error if exists
+        if (error) reject({ error })
+  
+        // Finish
+        resolve(chaptersRecord)
+      })
+    })
+}
+const getIconByCategory= (category)=>{
+    
+  return new Promise((resolve, reject) => {
+      // Setup empty array to store results
+      
+      const chaptersRecord = []
+  
+      // Query
+      const apiQuery = {
+        pageSize: 100,
+      }
+  
+      // Go get it!
+      base('Categories').select(apiQuery).eachPage(function page(records, fetchNextPage) {
+        // This function (`page`) will get called for each page of records.
+        // The properties here would correspond to your records
+
+        records.forEach(record=> {
+          console.log(record.fields.Icons)
+          if(record.fields.Name==category){
+            // Store each result in our empty array
+            console.log(record.fields.Icons.url)
+          chaptersRecord.push(record.fields.Icons)
+          }
+        })
+  
+        fetchNextPage()
+      }, function done(error) {
+        // Throw error if exists
+        if (error) reject({ error })
+  
+        // Finish
+        resolve(chaptersRecord)
+      })
+    })
+}
 const getChapterByState= (state)=>{
     
   return new Promise((resolve, reject) => {
@@ -334,6 +404,20 @@ server.get('/categories', (req, res) => {
         console.log(err)
         res.status(500).json({message:"Can't fetch"})
     })
+})
+server.get('/categories/services', (req, res)=>{
+  Promise.resolve(getServiceByCategory(req.headers.category)).then(data=>{
+    res.status(200).json(data)
+  }).catch(err=>{
+    res.status(500).json({message:err})
+  })
+})
+server.get('/categories/Icon', (req, res)=>{
+  Promise.resolve(getIconByCategory(req.headers.category)).then(data=>{
+    res.status(200).json(data)
+  }).catch(err=>{
+    res.status(500).json({message:err})
+  })
 })
 
 
