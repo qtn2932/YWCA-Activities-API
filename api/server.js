@@ -180,10 +180,7 @@ const getState= ()=>{
 
         records.forEach(record=> {
 
-            const post ={
-              States: record.fields.FullName,
-          }
-          chaptersRecord.push(post);
+          chaptersRecord.push(record.fields.FullName);
           
   
           // Store each result in our empty array
