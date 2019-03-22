@@ -151,7 +151,7 @@ const getServiceByCategory= (category)=>{
       })
     })
 }
-const getIconByCategory= (category)=>{
+const getIconByCategory= ()=>{
     
   return new Promise((resolve, reject) => {
       // Setup empty array to store results
@@ -170,11 +170,7 @@ const getIconByCategory= (category)=>{
 
         records.forEach(record=> {
           console.log(record.fields.Icons)
-          if(record.fields.Name==category){
-            // Store each result in our empty array
-            console.log(record.fields.Icons.url)
           chaptersRecord.push(record.fields.Icons)
-          }
         })
   
         fetchNextPage()
@@ -413,7 +409,7 @@ server.get('/categories/services', (req, res)=>{
   })
 })
 server.get('/categories/Icon', (req, res)=>{
-  Promise.resolve(getIconByCategory(req.headers.category)).then(data=>{
+  Promise.resolve(getIconByCategory()).then(data=>{
     res.status(200).json(data)
   }).catch(err=>{
     res.status(500).json({message:err})
